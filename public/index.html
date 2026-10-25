@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>HiperMove · count reps, read your movement</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦵</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>HiperMove</h1>
+      <p>Film a set. We track the joints, count the reps, and Gemma explains what happened.</p>
+    </div>
+    <div class="controls" role="group" aria-label="Session controls">
+      <label class="field">
+        <span>Exercise</span>
+        <select id="exercise">
+          <option value="squat">Squat</option>
+          <option value="pushup">Push-up</option>
+          <option value="curl">Bicep curl</option>
+        </select>
+      </label>
+      <label class="btn primary" for="file">Upload a clip</label>
+      <input id="file" type="file" accept="video/*" hidden>
+      <button class="btn" id="camera" type="button">Use camera</button>
+      <button class="btn ghost" id="stop" type="button" disabled>Stop</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="bench">
+      <div class="stage" id="stage">
+        <video id="video" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="stage-empty" id="empty">
+          <p class="empty-title">No clip yet</p>
+          <p id="tip">Side view, full body in frame, phone at hip height.</p>
+          <p class="status" id="status">Loading pose model…</p>
+        </div>
+      </div>
+
+      <aside class="readout" aria-live="polite">
+        <div class="count">
+          <span class="count-num" id="reps">0</span>
+          <span class="count-label">reps counted</span>
+        </div>
+        <dl class="live">
+          <div><dt id="metricLabel">Knee angle</dt><dd><span id="angle">–</span>°</dd></div>
+          <div><dt>Phase</dt><dd id="phase">waiting</dd></div>
+          <div><dt>Partial reps</dt><dd id="partials">0</dd></div>
+          <div><dt>Tracking side</dt><dd id="side">–</dd></div>
+        </dl>
+        <p class="hint" id="thresholdHint"></p>
+      </aside>
+    </section>
+
+    <section class="trace-wrap">
+      <h2>Angle over time</h2>
+      <canvas id="trace" height="160"></canvas>
+    </section>
+
+    <section class="results">
+      <div class="reps-panel">
+        <div class="panel-head">
+          <h2>Rep by rep</h2>
+          <button class="btn small ghost" id="download" type="button" disabled>Download session JSON</button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Rep</th><th>Lowest angle</th><th>Time</th><th id="leanHead">Torso lean</th><th>Note</th></tr></thead>
+            <tbody id="repRows"><tr class="placeholder"><td colspan="5">Reps appear here as they finish.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="gemma-panel">
+        <div class="panel-head">
+          <h2>Coach notes</h2>
+          <span class="model-tag" id="modelTag">Gemma 4</span>
+        </div>
+        <p class="muted" id="gemmaIntro">When the clip ends, Gemma starts reading your measurements and rep frames automatically and explains them in plain words.</p>
+        <button class="btn primary wide" id="explain" type="button" disabled>Explain my session</button>
+        <div id="gemmaOut" class="gemma-out" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Estimates from a single 2D camera. Not medical advice and not a diagnosis. Pose tracking by MediaPipe; explanations by Gemma 4 via the Gemini API.</p>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

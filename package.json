@@ -1,0 +1,19 @@
+{
+  "name": "hipermove",
+  "version": "1.0.0",
+  "description": "HiperMove: AI movement assistant. MediaPipe Pose counts reps and measures joint angles; Gemma 4 explains the session.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test",
+    "check": "node scripts/check-gemma.js"
+  },
+  "engines": { "node": ">=18.17" },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "express": "4.21.2"
+  }
+}
