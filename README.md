@@ -4,17 +4,12 @@
 
 Film a set of squats, push-ups or bicep curls on your phone. HiperMove tracks your joints in the browser, counts every rep, separates **full reps from partial reps**, and then **Gemma 4** reads the measurements and two rep snapshots to tell you, in plain English, what to fix next set. Your video never leaves your device.
 
-| | |
-|---|---|
-| **Demo video** | _add link here_ |
-| **Pitch deck** | _add link here_ |
-| **Project page** | _add link here (optional, e.g. GitHub Pages)_ |
-| **Team** | **Binary Brains**, RGIPT |
 
 ### Team Binary Brains
 - **Arjav Jain** (team lead)
 - **Nagorao Dinkar Kute**
 - **Ayush Mishra**
+- **Nimit Jain**
 
 ---
 
